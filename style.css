@@ -1,86 +1,138 @@
 body {
-    font-family: system-ui, sans-serif;
-    background: #fafbfc;
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  font-family: 'Inter', system-ui, sans-serif;
+  background: linear-gradient(135deg, #f8fbfe 0%, #dadefa 100%);
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container {
+  background: #fff;
+  box-shadow: 0 4px 24px 0 rgba(80,115,240,0.13), 0 1.5px 5.5px 0 #acb7d4;
+  padding: 2.4em 2em 2.2em 2em;
+  border-radius: 18px;
+  width: 100%;
+  max-width: 490px;
+  border: 1px solid #e3e9f9;
+}
+.emoji {
+  font-size: 1.5em;
+  vertical-align: -0.15em;
+  margin-right: 6px;
+}
+h1 {
+  margin-top: 0;
+  font-size: 1.55rem;
+  margin-bottom: 1.15em;
+  text-align: center;
+  font-weight: 600;
+  color: #29355c;
+  letter-spacing: 0.01em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+}
+textarea {
+  width: 100%;
+  min-height: 124px;
+  font-size: 1.07rem;
+  padding: 1em 0.8em;
+  border: 1.3px solid #d8e1f8;
+  border-radius: 10px;
+  resize: vertical;
+  margin-bottom: 1.08em;
+  box-sizing: border-box;
+  transition: border 0.18s;
+  background: #f4f6f9;
+  color: #23263e;
+}
+textarea:focus {
+  outline: none;
+  border-color: #729bfa;
+  background: #fff;
+}
+button {
+  display: block;
+  width: 100%;
+  background: linear-gradient(93deg, #57a4fc 8%, #85ebcd 100%);
+  color: #fff;
+  font-size: 1.08rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  padding: 0.86em 0;
+  cursor: pointer;
+  margin-bottom: 1.23em;
+  transition: background 0.20s, box-shadow 0.20s;
+  box-shadow: 0 3px 8px 0 rgba(124,193,242,0.09);
+}
+button:hover, button:focus {
+  background: linear-gradient(120deg, #6ccff6 10%, #69ffb7 100%);
+  box-shadow: 0 4px 16px 0 rgba(85,230,153,0.09);
+}
+button:disabled {
+  background: #c5dde9;
+  cursor: not-allowed;
+}
+#summary {
+  background: linear-gradient(89deg, #fff5e9 83%, #f0ffe9 100%);
+  border-left: 4px solid #f29d55;
+  border-radius: 9px;
+  padding: 1.07em 1.1em;
+  font-size: 1.09rem;
+  min-height: 2.67em;
+  margin-top: 0.4em;
+  word-break: break-word;
+  color: #26402f;
+  font-weight: 500;
+  box-shadow: 0 1px 7px rgba(250,190,95,0.06);
+  transition: background 0.18s, border-color 0.18s;
+}
+#summary:empty {
+  background: none;
+  border-left: none;
+  box-shadow: none;
+  min-height: 2em;
+}
+#loading {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin: 0.3em 0 1em 0;
+  font-size: 1.35em;
+  color: #57a4fc;
+  min-height: 2em;
+}
+#loading[style*="display: none"] {
+  min-height: 0;
+}
+.loading-dot {
+  opacity: 1;
+  animation: blink-fade 1.5s infinite;
+}
+.loading-dot:nth-child(2) {
+  animation-delay: 0.25s;
+}
+.loading-dot:nth-child(3) {
+  animation-delay: 0.5s;
+}
+@keyframes blink-fade {
+  0% { opacity: 0.3; }
+  50% { opacity: 1; }
+  100% { opacity: 0.3; }
+}
+@media (max-width: 600px) {
   .container {
-    background: #fff;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    padding: 2em 1.5em;
-    border-radius: 10px;
-    width: 100%;
-    max-width: 430px;
+    padding: 1.25em 0.2em 1.3em 0.2em;
+    max-width: 98vw;
   }
   h1 {
-    margin-top: 0;
-    font-size: 1.35rem;
-    margin-bottom: 1em;
-    text-align: center;
-    font-weight: 600;
+    font-size: 1.11rem;
+    gap: 0.35em;
   }
-  textarea {
-    width: 100%;
-    min-height: 100px;
+  textarea, #summary {
     font-size: 1rem;
-    padding: 0.7em;
-    border: 1px solid #dde1e6;
-    border-radius: 6px;
-    resize: vertical;
-    margin-bottom: 1em;
-    box-sizing: border-box;
   }
-  button {
-    display: block;
-    width: 100%;
-    background: #3097fa;
-    color: #fff;
-    font-size: 1rem;
-    font-weight: 600;
-    border: none;
-    border-radius: 6px;
-    padding: 0.7em 0;
-    cursor: pointer;
-    margin-bottom: 1em;
-    transition: background 0.12s;
-  }
-  button:disabled {
-    background: #a6bdda;
-    cursor: not-allowed;
-  }
-  #summary {
-    background: #f3f7fa;
-    border-radius: 6px;
-    padding: 1em;
-    font-size: 1rem;
-    min-height: 2.5em;
-    margin-top: 0.2em;
-    word-break: break-word;
-    color: #24292f;
-    transition: background 0.18s;
-  }
-  #loading {
-    text-align: center;
-    margin: 0.4em 0 1em 0;
-    font-size: 1em;
-    display: none;
-    color: #3097fa;
-  }
-  @media (max-width: 560px) {
-    .container {
-      padding: 1.1em 0.3em;
-    }
-    h1 {
-      font-size: 1.08rem;
-    }
-    textarea {
-      font-size: 0.98rem;
-    }
-    #summary {
-      font-size: 0.98rem;
-    }
-  }
-  
+}

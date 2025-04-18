@@ -1,6 +1,7 @@
-// TODO: Replace 'YOUR_DEEPSEEK_API_KEY' with your DeepSeek API key
-const DEEPSEEK_API_KEY = '11a0f899f58fbc8b0620ef9851ca2a905febd63f35587640608839a6da3c3d0c';
-const API_URL = 'https://api.deepseek.com/v1/chat/completions';
+// TODO: Replace 'YOUR_GEMINI_API_KEY' with your Gemini (Google AI) API key
+const GEMINI_API_KEY = 'AIzaSyB0zTkA84M5z39n0rLjq2upvXAkZj2DzVM';
+const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
+
 
 const input = document.getElementById('inputText');
 const btn = document.getElementById('summarizeBtn');
@@ -11,31 +12,27 @@ btn.onclick = async function() {
   const text = input.value.trim();
   if (!text) return;
   summaryDiv.textContent = '';
-  loading.style.display = 'block';
+  loading.style.display = 'flex';
   btn.disabled = true;
   try {
-    const sysPrompt = "Summarize the following text in a clear and concise way:";
+    const prompt = `Summarize the following text in a clear and concise way:\n\n${text}`;
     const payload = {
-      model: "deepseek-chat",
-      messages: [
-        { role: "system", content: sysPrompt },
-        { role: "user", content: text }
-      ],
-      temperature: 0.3,
-      max_tokens: 512
+      contents: [
+        {
+          parts: [
+            { text: prompt }
+          ]
+        }
+      ]
     };
-    const response = await fetch(API_URL, {
+    const response = await fetch(GEMINI_API_URL, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${DEEPSEEK_API_KEY}`
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
     if (!response.ok) throw new Error('API Error: ' + response.statusText);
     const data = await response.json();
-    const output = data.choices?.[0]?.message?.content ||
-                   'No summary returned.';
+    const output = data.candidates?.[0]?.content?.parts?.[0]?.text || 'No summary returned.';
     summaryDiv.textContent = output.trim();
   } catch (err) {
     summaryDiv.textContent = 'Error: ' + (err.message || 'Request failed');

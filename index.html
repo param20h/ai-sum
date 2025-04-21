@@ -4,20 +4,131 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Text Summarizer</title>
+  <title>AI Summarizer Suite</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1><span class="emoji" aria-hidden="true">📝</span> AI Text Summarizer</h1>
-    <textarea id="inputText" placeholder="Paste or type long text here..."></textarea>
-    <button id="summarizeBtn">Summarize</button>
-    <div id="loading"><span class="loading-dot">•</span><span class="loading-dot">•</span><span class="loading-dot">•</span></div>
-    <div id="summary"></div>
+  <div class="hero-bg"></div>
+  <div class="main-glass">
+    <nav class="topnav">
+      <div class="nav-logo">
+        <span class="mascot">🤖</span>
+        <span class="site-title">AI Summarizer</span>
+      </div>
+      <div class="nav-tabs">
+        <button class="tab-btn active" data-tab="text">Text Summarizer</button>
+        <button class="tab-btn" data-tab="youtube">YouTube Video Summarizer</button>
+        <button class="tab-btn" data-tab="webpage">Webpage Summarizer</button>
+      </div>
+    </nav>
+    <div class="tab-content" id="textTab" style="display: block">
+      <div class="container creative">
+        <h1><span class="emoji" aria-hidden="true">📝</span> Text Summarizer</h1>
+        <textarea id="inputText" placeholder="Paste or type long text here..."></textarea>
+        <div class="action-row">
+          <label for="langSelect" class="dropdown-label">Output Language:</label>
+          <div class="dropdown-wrap">
+            <select id="langSelect" aria-label="Translate summary">
+              <option value="en">English</option>
+              <option value="es">Spanish</option>
+              <option value="fr">French</option>
+              <option value="de">German</option>
+              <option value="hi">Hindi</option>
+              <option value="zh">Chinese</option>
+            </select>
+          </div>
+          <button id="summarizeBtn">Summarize</button>
+        </div>
+        <div id="loading"><span class="loading-dot">•</span><span class="loading-dot">•</span><span class="loading-dot">•</span></div>
+        <div class="result-area">
+          <div class="summary-box">
+            <button class="copy-btn" id="copySummary" title="Copy summary">📋</button>
+            <span class="confetti" id="confetti"></span>
+            <span id="checkMark" aria-label="Success">✔️</span>
+            <div id="summary"></div>
+          </div>
+          <div class="reactions" id="feedbackText">
+            <button class="feedback-btn" data-type="up" title="Helpful">👍</button>
+            <button class="feedback-btn" data-type="down" title="Not Helpful">👎</button>
+            <button class="feedback-btn" data-type="love" title="Loved it!">❤️</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-content" id="youtubeTab" style="display: none">
+      <div class="container creative">
+        <h1><span class="emoji" aria-hidden="true">🎬</span> YouTube Video Summarizer</h1>
+        <input id="youtubeUrl" type="text" class="youtube-input" placeholder="Paste YouTube video URL here...">
+        <div class="action-row">
+          <label for="ytLangSelect" class="dropdown-label">Output Language:</label>
+          <div class="dropdown-wrap">
+            <select id="ytLangSelect" aria-label="Translate summary">
+              <option value="en">English</option>
+              <option value="es">Spanish</option>
+              <option value="fr">French</option>
+              <option value="de">German</option>
+              <option value="hi">Hindi</option>
+              <option value="zh">Chinese</option>
+            </select>
+          </div>
+          <button id="ytSummarizeBtn">Summarize Video</button>
+        </div>
+        <div id="ytLoading"><span class="loading-dot">•</span><span class="loading-dot">•</span><span class="loading-dot">•</span></div>
+        <div class="result-area">
+          <div class="summary-box">
+            <button class="copy-btn" id="copyYtSummary" title="Copy summary">📋</button>
+            <span class="confetti" id="ytConfetti"></span>
+            <span id="ytCheckMark" aria-label="Success">✔️</span>
+            <div id="ytSummary"></div>
+          </div>
+          <div class="reactions" id="feedbackYt">
+            <button class="feedback-btn" data-type="up" title="Helpful">👍</button>
+            <button class="feedback-btn" data-type="down" title="Not Helpful">👎</button>
+            <button class="feedback-btn" data-type="love" title="Loved it!">❤️</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-content" id="webpageTab" style="display: none">
+      <div class="container creative">
+        <h1><span class="emoji" aria-hidden="true">🌐</span> Webpage Summarizer</h1>
+        <input id="webUrl" type="text" class="youtube-input" placeholder="Paste any website URL here...">
+        <div class="action-row">
+          <label for="webLangSelect" class="dropdown-label">Output Language:</label>
+          <div class="dropdown-wrap">
+            <select id="webLangSelect" aria-label="Translate summary">
+              <option value="en">English</option>
+              <option value="es">Spanish</option>
+              <option value="fr">French</option>
+              <option value="de">German</option>
+              <option value="hi">Hindi</option>
+              <option value="zh">Chinese</option>
+            </select>
+          </div>
+          <button id="webSummarizeBtn">Summarize Page</button>
+        </div>
+        <div id="webLoading"><span class="loading-dot">•</span><span class="loading-dot">•</span><span class="loading-dot">•</span></div>
+        <div class="result-area">
+          <div class="summary-box">
+            <button class="copy-btn" id="copyWebSummary" title="Copy summary">📋</button>
+            <span class="confetti" id="webConfetti"></span>
+            <span id="webCheckMark" aria-label="Success">✔️</span>
+            <div id="webSummary"></div>
+          </div>
+          <div class="reactions" id="feedbackWeb">
+            <button class="feedback-btn" data-type="up" title="Helpful">👍</button>
+            <button class="feedback-btn" data-type="down" title="Not Helpful">👎</button>
+            <button class="feedback-btn" data-type="love" title="Loved it!">❤️</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+  <footer class="app-footer"><span class="footer-by">Made by <span class="footer-wriiten">Pikachu❤️</span></span></footer>
+  <div id="toast" class="toast"></div>
   <script src="script.js"></script>
 </body>
 </html>

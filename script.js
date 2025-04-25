@@ -1,4 +1,4 @@
-// --- Tab Switching Logic ---
+
 const tabBtns = document.querySelectorAll('.tab-btn');
 const tabContents = {
   text: document.getElementById('textTab'),
@@ -28,7 +28,7 @@ function celebrate({confettiEl, checkMarkEl}) {
   if(confettiEl) {
     confettiEl.innerHTML = '🎉';
     confettiEl.style.display = 'block';
-    setTimeout(()=>{ confettiEl.style.display = 'none'; }, 1300);
+    setTimeout(()=>{ confettiEl.style.display = 'none'; }, 2000);
   }
   if(checkMarkEl) {
     checkMarkEl.style.display = 'inline-block';
@@ -43,7 +43,7 @@ const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/
 async function summarizeGemini(text, lang) {
   let prompt;
   if (lang && lang !== 'en') {
-    prompt = `Summarize the following text in a clear and concise way, and then translate the summary into ${getLangStr(lang)}:\n\n${text}`;
+    prompt = `Summarize the following text in a clear and concise way, and then translate the summary into and give the text as small and understandable ${getLangStr(lang)}:\n\n${text}`;
   } else {
     prompt = `Summarize the following text in a clear and concise way:\n\n${text}`;
   }
@@ -100,9 +100,23 @@ function handleFeedback(feedbackRoot) {
       b.onclick = function() {
         resetReactions(feedbackRoot);
         b.classList.add('active');
-        showToast({up:'Glad it helped!', down:'We’ll improve!', love:'❤️ Thank you!'}[b.dataset.type] || 'Thanks for your feedback!')
-      }
-    })
+        const toastMessage = { 
+          up: 'Glad it helped!', 
+          down: 'We’ll improve!', 
+          love: '❤️ Thank you!' 
+        }[b.dataset.type] || 'Thanks for your feedback!';
+        
+        // Add animation for a nicer popup effect
+        const toast = document.getElementById('toast');
+        toast.textContent = toastMessage;
+        toast.classList.add('show', 'fade-in');
+        setTimeout(() => {
+          toast.classList.remove('fade-in');
+          toast.classList.add('fade-out');
+        }, 1000); // Fade out after 1 second
+        setTimeout(() => toast.classList.remove('show', 'fade-out'), 1500);
+      };
+    });
   }
 }
 
@@ -257,3 +271,7 @@ handleFeedback(feedbackWeb);
 // Initially hide all loading, confetti, checkmark buttons
 [loading, ytLoading, webLoading].forEach(el => (el.style.display = 'none'));
 [confetti, checkMark, ytConfetti, ytCheckMark, webConfetti, webCheckMark].forEach(el => (el.style.display = 'none'));
+
+[copyBtn, ytCopyBtn, webCopyBtn].forEach(el => (el.style.display = 'none'));
+
+[summaryDiv, ytSummaryDiv, webSummaryDiv].forEach(el => (el.textContent = ''));

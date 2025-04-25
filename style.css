@@ -52,7 +52,7 @@ body {
   transition: transform 0.28s cubic-bezier(.62,.14,.26,1.47);
 }
 .mascot:hover {
-  transform: rotate(7deg) scale(1.07);
+  transform: rotate(360deg) scale(2.07);
   filter: drop-shadow(0 0px 2px #60e9c3b5);
 }
 .site-title {
@@ -120,6 +120,11 @@ body {
   vertical-align: -0.15em;
   margin-right: 6px;
   filter: drop-shadow(0 1px 1px #c9f6f9c4);
+}
+.emoji:hover {
+  filter: drop-shadow(0 1px 1px #c9f6f9);
+  transform: scale(1.5) rotate( 0deg);
+  transition: transform 0.18s, filter 0.18s;
 }
 h1 {
   margin-top: 0;
@@ -524,4 +529,44 @@ select:focus {
   color: #8750f5;
   letter-spacing: .05em;
   font-size: 1.2em;
+}
+
+.footer-wriiten:hover {
+  color: #a0a1f5;
+  filter: drop-shadow(0 0 4px #a0a1f5);
+  transform: scale(1.05) rotate(-2deg);
+  transition: color 0.18s, transform 0.18s, filter 0.18s;
+}
+
+.footer-wriiten:active {
+  color: #8750f5;
+  filter: drop-shadow(0 0 4px #8750f5);
+  transform: scale(1.1) rotate(-2deg);
+  transition: color 0.18s, transform 0.18s, filter 0.18s;
+}
+.footer-wriiten:focus {
+  outline: none;
+  color: #8750f5;
+  filter: drop-shadow(0 0 4px #8750f5);
+  transform: scale(1.1) rotate(-2deg);
+  transition: color 0.18s, transform 0.18s, filter 0.18s;
+}
+.footer-wriiten:active, .footer-wriiten:focus {
+  color: #8750f5;
+  filter: drop-shadow(0 0 4px #8750f5);
+  transform: scale(1.1) rotate(-2deg);
+  transition: color 0.18s, transform 0.18s, filter 0.18s;
+}
+.footer-wriiten:focus-visible {
+  outline: none;
+  color: #8750f5;
+  filter: drop-shadow(0 0 4px #8750f5);
+  transform: scale(1.1) rotate(-2deg);
+  transition: color 0.18s, transform 0.18s, filter 0.18s;
+}
+.footer-wriiten:focus-visible:active {
+  color: #8750f5;
+  filter: drop-shadow(0 0 4px #8750f5);
+  transform: scale(1.1) rotate(-2deg);
+  transition: color 0.18s, transform 0.18s, filter 0.18s;
 }

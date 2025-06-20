@@ -1,7 +1,6 @@
 # 🧠 AI Summarizer
 
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Made With](https://img.shields.io/badge/Made%20With-Python-blue)
 ![Deployed](https://img.shields.io/badge/Deployed-Yes-success)
 ![Status](https://img.shields.io/badge/Status-Work%20In%20Progress-yellow)
 

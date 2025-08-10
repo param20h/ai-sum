@@ -30,5 +30,3 @@ AI Summarizer is a simple yet powerful web application that generates **concise 
 
 ## 📸 Screenshots
 ![image](https://github.com/user-attachments/assets/beee4d2f-2b20-4777-ae3a-675a6267a970)
-
-<!-- Insert screenshots here if available -->

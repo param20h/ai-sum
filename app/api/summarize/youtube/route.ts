@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 // @ts-ignore
 import { YoutubeTranscript } from "youtube-transcript";
+import { GoogleGenAI } from "@google/genai";
 
 export async function POST(request: NextRequest) {
   try {
@@ -10,13 +11,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { error: "YouTube URL is required" },
         { status: 400 }
-      );
-    }
-
-    if (!process.env.GEMINI_API_KEY) {
-      return NextResponse.json(
-        { error: "API key not configured" },
-        { status: 500 }
       );
     }
 
@@ -41,9 +35,32 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Return transcript as summary
+    let summary = transcript;
+
+    // If Gemini API Key is available, summarize with Gemini
+    if (process.env.GEMINI_API_KEY) {
+      try {
+        const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+        let prompt = "";
+        if (language && language !== "en") {
+          prompt = `Summarize the following YouTube video transcript clearly and concisely, then translate into ${getLanguageName(language)}:\n\n${transcript}`;
+        } else {
+          prompt = `Summarize the following YouTube video transcript clearly, concisely, and with key highlights:\n\n${transcript}`;
+        }
+        const aiRes = await ai.models.generateContent({
+          model: "gemini-2.5-flash",
+          contents: prompt,
+        });
+        if (aiRes.text) {
+          summary = aiRes.text.trim();
+        }
+      } catch (geminiError) {
+        console.warn("Gemini summarization failed, returning full transcript:", geminiError);
+      }
+    }
+
     return NextResponse.json({ 
-      summary: transcript,
+      summary,
       videoId,
       success: true 
     });

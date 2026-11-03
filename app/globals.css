@@ -1,32 +1,39 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  /*
+   * 3-Color Trio System:
+   * 1. Light:        #F8FAFC (248 250 252)
+   * 2. Medium Dark:  #334155 (51 65 85) / #1E293B (30 41 59)
+   * 3. Dark:         #0B0F17 (11 15 23)
+   */
+
   :root {
-    --background: 255 255 255;
-    --foreground: 23 23 23;
-    --card: 255 255 255;
-    --card-foreground: 23 23 23;
-    --muted: 245 245 245;
-    --muted-foreground: 115 115 115;
-    --border: 229 229 229;
-    --accent: 23 23 23;
-    --accent-foreground: 255 255 255;
+    --background: 248 250 252;          /* Light tone */
+    --foreground: 11 15 23;             /* Dark tone */
+    --card: 255 255 255;               /* Clean white surface */
+    --card-foreground: 11 15 23;        /* Dark text */
+    --muted: 241 245 249;              /* Light slate container */
+    --muted-foreground: 51 65 85;       /* Medium Dark - high legibility text */
+    --border: 203 213 225;             /* Subtle Medium Dark border tint */
+    --accent: 51 65 85;                /* Medium Dark */
+    --accent-foreground: 248 250 252;  /* Light */
   }
 
   .dark {
-    --background: 0 0 0;
-    --foreground: 250 250 250;
-    --card: 23 23 23;
-    --card-foreground: 250 250 250;
-    --muted: 38 38 38;
-    --muted-foreground: 163 163 163;
-    --border: 38 38 38;
-    --accent: 250 250 250;
-    --accent-foreground: 0 0 0;
+    --background: 11 15 23;             /* Dark tone */
+    --foreground: 248 250 252;          /* Light tone */
+    --card: 19 25 38;                  /* Medium Dark card surface */
+    --card-foreground: 248 250 252;     /* Light text */
+    --muted: 30 41 59;                 /* Medium Dark surface */
+    --muted-foreground: 148 163 184;   /* Slate light-medium text */
+    --border: 51 65 85;                /* Medium Dark border */
+    --accent: 248 250 252;             /* Light */
+    --accent-foreground: 11 15 23;     /* Dark */
   }
 
   * {
@@ -36,15 +43,28 @@
   body {
     background-color: rgb(var(--background));
     color: rgb(var(--foreground));
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  input[type="text"],
+  textarea,
+  select {
+    border: 1px solid rgb(var(--border));
+  }
+
+  input[type="text"]:hover,
+  textarea:hover,
+  select:hover {
+    border-color: rgb(var(--muted-foreground) / 0.5);
   }
 }
 
 /* Minimal scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -53,7 +73,7 @@
 
 ::-webkit-scrollbar-thumb {
   background: rgb(var(--border));
-  border-radius: 3px;
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -77,5 +97,5 @@ select:focus-visible {
 
 /* Transitions */
 button, input, textarea, select, a {
-  transition: all 0.15s ease;
+  transition: all 0.15s ease-in-out;
 }
